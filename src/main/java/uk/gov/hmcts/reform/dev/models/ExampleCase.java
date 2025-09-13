@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ExampleCase {
-
     private int id;
     private String caseNumber;
     private String title;

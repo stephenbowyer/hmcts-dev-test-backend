@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(RootController.class)
 class GetWelcomeTest {
 
     @Autowired
@@ -21,7 +21,6 @@ class GetWelcomeTest {
     @Test
     void welcomeRootEndpoint() throws Exception {
         MvcResult response = mockMvc.perform(get("/")).andExpect(status().isOk()).andReturn();
-
         assertThat(response.getResponse().getContentAsString()).startsWith("Welcome");
     }
 }

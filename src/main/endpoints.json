@@ -1,0 +1,68 @@
+{
+    "GET /api": {
+        "description": "serves up a json representation of all the available endpoints of the api"
+    },
+    "GET /api/task": {
+        "description": "retrieves all tasks",
+        "exampleResponse": {
+            "tasks": [
+                {
+                    "id": 1,
+                    "title": "Task 1",
+                    "description": "Description for Task 1",
+                    "status": "Pending",
+                    "dueDate": "2025-10-01"
+                },
+                {
+                    "id": 2,
+                    "title": "Task 2",
+                    "description": "Description for Task 2",
+                    "status": "In Progress",
+                    "dueDate": "2025-10-05"
+                }
+            ]
+        }
+    },
+    "GET /api/task/{id}": {
+        "description": "retrieves a specific task by its id",
+        "exampleResponse": {
+            "id": 1,
+            "title": "Task 1",
+            "description": "Description for Task 1",
+            "status": "Pending",
+            "dueDate": "2025-10-01"
+        }
+    },
+    "POST /api/task": {
+        "description": "creates a new task",
+        "exampleRequest": {
+            "title": "New Task",
+            "description": "Description for the new task",
+            "status": "Pending",
+            "dueDate": "2025-10-10"
+        },
+        "exampleResponse": {
+            "id": 3,
+            "title": "New Task",
+            "description": "Description for the new task",
+            "status": "Pending",
+            "dueDate": "2025-10-10"
+        }
+    },
+    "PATCH /api/task/{id}": {
+        "description": "updates the status of an existing task",
+        "exampleRequest": {
+            "status": "Completed"
+        },
+        "exampleResponse": {
+            "id": 1,
+            "title": "Task 1",
+            "description": "Description for Task 1",
+            "status": "Completed",
+            "dueDate": "2025-10-01"
+        }
+    },
+    "DELETE /api/task/{id}": {
+        "description": "deletes a specific task by its id"
+    }
+}
