@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import uk.gov.hmcts.reform.dev.models.TaskModel;
 import uk.gov.hmcts.reform.dev.repositories.TaskRepository;
 
@@ -65,9 +68,26 @@ public class TaskController {
     }
 
     @GetMapping(value = "/api/task", produces = "application/json")
-    public ResponseEntity<Iterable<TaskModel>> getAllTasks() {
-        Iterable<TaskModel> allTasks = taskRepository.findAll();
+    public ResponseEntity<Iterable<TaskModel>> getAllTasks(
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String status) {
+        Iterable<TaskModel> allTasks = null;
+        if (sort != null && status != null) {
+            allTasks = taskRepository.findByStatus(status, Sort.by(sort));
+        } else if (sort != null) {
+            allTasks = taskRepository.findAll(Sort.by(sort));
+        } else if (status != null) {
+            allTasks = taskRepository.findByStatus(status);
+        } else {
+            allTasks = taskRepository.findAll();
+        }
         return ResponseEntity.ok(allTasks);
+    }
+
+    @GetMapping(value = "/api/task/status", produces = "application/json")
+    public ResponseEntity<Iterable<String>> getDistinctTaskStatuses() {
+        Iterable<String> distinctStatuses = taskRepository.findDistinctStatus();
+        return ResponseEntity.ok(distinctStatuses);
     }
 
 }
