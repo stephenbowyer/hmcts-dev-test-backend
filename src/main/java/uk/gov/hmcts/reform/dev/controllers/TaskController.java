@@ -85,8 +85,8 @@ public class TaskController {
     }
 
     @GetMapping(value = "/api/task/status", produces = "application/json")
-    public ResponseEntity<Iterable<String>> getDistinctTaskStatuses() {
-        Iterable<String> distinctStatuses = taskRepository.findDistinctStatus();
+    public ResponseEntity<Iterable<Object[]>> getDistinctTaskStatuses() {
+        Iterable<Object[]> distinctStatuses = taskRepository.findDistinctStatus();
         return ResponseEntity.ok(distinctStatuses);
     }
 

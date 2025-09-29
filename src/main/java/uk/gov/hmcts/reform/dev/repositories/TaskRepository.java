@@ -13,6 +13,6 @@ public interface TaskRepository extends JpaRepository<TaskModel, Integer> {
 
     Iterable<TaskModel> findByStatus(String status, Sort sort);
 
-    @Query("SELECT DISTINCT status FROM TaskModel")
-    Iterable<String> findDistinctStatus();
+    @Query("SELECT DISTINCT status, count(status) as count FROM TaskModel GROUP BY status")
+    Iterable<Object[]> findDistinctStatus();
 }
