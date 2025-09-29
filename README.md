@@ -1,10 +1,50 @@
 # HMCTS Dev Test Backend
-This will be the backend for the brand new HMCTS case management system. As a potential candidate we are leaving
-this in your hands. Please refer to the brief for the complete list of tasks! Complete as much as you can and be
-as creative as you want.
 
-You should be able to run `./gradlew build` to start with to ensure it builds successfully. Then from that you
-can run the service in IntelliJ (or your IDE of choice) or however you normally would.
+You can try the [hosted online demo of the API here](http://peter.widearea.org:4000/api).
 
-There is an example endpoint provided to retrieve an example of a case. You are free to add/remove fields as you
-wish.
+## Features
+
+### /api
+
+GET list of API endpoints
+
+### /api/task
+
+POST to create a new task
+GET to retrieve a details of all tasks
+
+### /api/task/{id}
+
+GET to rectrive details of one task
+PATCH to update details of a task
+DELETE to remove a task
+
+### /api/task/status
+
+GET summarised list of task status types
+
+## Minimum Installation Requirements
+
+This has been tested and works with OpenJDK 21 and PostgreSQL 14.
+
+## Installation Instructions
+
+A database must be created with the following table:
+
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(2048) NULL,
+    status VARCHAR(50) NOT NULL,
+    due_date TIMESTAMP NOT NULL
+);
+
+The database details are passed to the backend through the following environment variables: DB_HOST, DB_PORT, DB_NAME, DB_USER_NAME and DB_PASSWORD.
+
+To compile and run the backend API:
+
+git clone https://github.com/stephenbowyer/hmcts-dev-test-backend
+cd hmcts-dev-test-backend
+./gradlew build clean
+./gradlew bootRun
+
